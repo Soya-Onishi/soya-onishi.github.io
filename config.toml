@@ -1,0 +1,9 @@
+baseURL = 'https://soya.github.io'
+languageCode = 'ja-jp'
+title = 'Indigo Bell'
+theme = "kembang"
+
+[params]
+brand = "Indigo Bell"
+descirption = "備忘録などをまとめます"
+custom_css = ["/css/main.css", "/css/normalize.css", "/css/bootstrap.css"]
