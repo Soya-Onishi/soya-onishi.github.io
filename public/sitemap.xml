@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://soya.github.io/</loc>
+    <lastmod>2023-01-05T19:58:38+09:00</lastmod>
+  </url>
+  <url>
+    <loc>https://soya.github.io/post/</loc>
+    <lastmod>2023-01-05T19:58:38+09:00</lastmod>
+  </url>
+  <url>
+    <loc>https://soya.github.io/post/init-post/</loc>
+    <lastmod>2023-01-05T19:58:38+09:00</lastmod>
+  </url>
+  <url>
+    <loc>https://soya.github.io/about/</loc>
+    <lastmod>2023-01-05T00:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://soya.github.io/categories/</loc>
+  </url>
+  <url>
+    <loc>https://soya.github.io/tags/</loc>
+  </url>
+</urlset>
