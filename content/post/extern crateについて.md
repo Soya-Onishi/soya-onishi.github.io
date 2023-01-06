@@ -1,7 +1,7 @@
 ---
 title: "extern crateについて"
 date: 2023-01-05T22:25:29+09:00
-draft: true
+draft: false
 ---
 
 `extern crate`についてedition 2018以降はほぼ使う必要がないとRustBookあたりに書いてあったと記憶しているが、

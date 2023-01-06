@@ -6,4 +6,4 @@ theme = "kembang"
 [params]
 brand = "Indigo Bell"
 descirption = "備忘録などをまとめます"
-custom_css = ["/css/main.css", "/css/normalize.css", "/css/bootstrap.css"]
+custom_css = ["/css/main.css", "/css/normalize.css", "/css/bootstrap.css", "/css/custom-font.css"]
