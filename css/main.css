@@ -1,11 +1,12 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
 html,
 body {
   height: 100%;
   width: 100%;
   font-family: 'Jost', sans-serif !important;
   font-size: 16px;
-  margin: 0; 
-  
+  margin: 0;
 }
 a {
     color: var(--primary-color);
@@ -213,7 +214,7 @@ ul.lists {
 }
 /*footer*/
 .foot {
-    background-color: #f8f9fa;
+    background-color: #cfd0d1;
 }
 
 /*images*/

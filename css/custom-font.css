@@ -7,6 +7,8 @@ h2 {
   text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 
 p {

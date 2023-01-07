@@ -17,7 +17,7 @@ edition 2018以降はどうなのか 参考にしているページではボイ�
 The Rust Referenceでの記載"><meta itemprop=datePublished content="2023-01-05T22:25:29+09:00">
 <meta itemprop=dateModified content="2023-01-05T22:25:29+09:00">
 <meta itemprop=wordCount content="41">
-<meta itemprop=keywords content>
+<meta itemprop=keywords content="Rust,">
 <meta property="og:title" content="extern crateについて">
 <meta property="og:description" content="extern crateについてedition 2018以降はほぼ使う必要がないとRustBookあたりに書いてあったと記憶しているが、 その感覚でいるとたまにlinterにextern crateを書けと言われたりする。 どういうときにextern crateが必要になるのかちゃんと理解できてなかったので、いい機会なので調べてみました。
 TL;DR 基本的にはRustBookの言うとおり、不要。
@@ -47,15 +47,24 @@ The Rust Referenceでの記載">
 <link defer rel=stylesheet href=/font.cc958b841144b5e6348b4723514869a46d121c6cf691e9e0009d86281ad5cc37.css integrity>
 <link rel=stylesheet href=https://soya-onishi.github.io/css/main.css><link rel=stylesheet href=https://soya-onishi.github.io/css/normalize.css><link rel=stylesheet href=https://soya-onishi.github.io/css/bootstrap.css><link rel=stylesheet href=https://soya-onishi.github.io/css/custom-font.css>
 </head>
-<body>
+<body class="d-flex flex-column justify-content-between" style=min-height:100vh>
+<div class=justify-content-start>
 <header class="p-3 text-bg-dark site-header sticky-top py-3">
 <div class=container>
 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-<a href=/ class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none" aria-label=Kembang><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentcolor" viewBox="0 0 16 16"><path d="M8.186 1.113a.5.5.0 00-.372.0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5.0 011.114.0l7.129 2.852A.5.5.0 0116 3.5v8.662a1 1 0 01-.629.928l-7.185 2.874a.5.5.0 01-.372.0L.63 13.09A1 1 0 010 12.162V3.5a.5.5.0 01.314-.464L7.443.184z"/></svg>
-</a>
 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-<li><a href=/ class="nav-link px-4 text-white">Home</a></li>
-<li><a href=/about class="nav-link px-4 text-white">About</a></li>
+<li><a href=/ class="nav-link px-3 text-white">Home</a></li>
+<li><a href=/about class="nav-link px-3 text-white">About</a></li>
+</ul>
+<ul style=list-style-type:none class="list-group list-group-horizontal">
+<li class=px-3>
+<a href=https://github.com/Soya-Onishi><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" class="bi bi-github" viewBox="0 0 16 16"><path d="M8 0C3.58.0.0 3.58.0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38.0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95.0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12.0.0.67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15.0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48.0 1.07-.01 1.93-.01 2.2.0.21.15.46.55.38A8.012 8.012.0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+</a>
+</li>
+<li class=px-3>
+<a href=https://twitter.com/out__of__water><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" class="bi bi-twitter" viewBox="0 0 16 16"><path d="M5.026 15c6.038.0 9.341-5.003 9.341-9.334.0-.14.0-.282-.006-.422A6.685 6.685.0 0016 3.542a6.658 6.658.0 01-1.889.518 3.301 3.301.0 001.447-1.817 6.533 6.533.0 01-2.087.793A3.286 3.286.0 007.875 6.03 9.325 9.325.0 011.108 2.601a3.289 3.289.0 001.018 4.382A3.323 3.323.0 01.64 6.575v.045a3.288 3.288.0 002.632 3.218 3.203 3.203.0 01-.865.115 3.23 3.23.0 01-.614-.057 3.283 3.283.0 003.067 2.277A6.588 6.588.0 01.78 13.58 6.32 6.32.0 010 13.535 9.344 9.344.0 005.026 15z"/></svg>
+</a>
+</li>
 </ul>
 </div>
 </div>
@@ -64,12 +73,18 @@ The Rust Referenceでの記載">
 <div class=container>
 <div class="row justify-content-center pt-4">
 <div class=pr-lg-4>
-<div class="title mb-5">
+<div class="title mb-3">
 <h1 class="text-left mb-4 fw-bold">extern crateについて</h1>
-<div class=text-left>
+<div class="text-left mb-4">
 <div class=time>Jan. 5, 2023</div>
 </div>
+<button class="btn btn-outline-light btn-sm rounded" type=button>
+<div id=tags>
+<li><a href=/tags/rust>Rust</a></li>
 </div>
+</button>
+</div>
+<hr>
 <article class=page-content>
 <p><code>extern crate</code>についてedition 2018以降はほぼ使う必要がないとRustBookあたりに書いてあったと記憶しているが、
 その感覚でいるとたまにlinterに<code>extern crate</code>を書けと言われたりする。
@@ -100,41 +115,16 @@ toolchainに紐付いているクレートには<code>std</code>も含まれる�
 </div>
 </div>
 </div>
-</br>
-<div class=foot>
+<div>
+<div class="foot mt-auto">
 <div class=container>
-<footer class=py-5>
-<div class=row>
-<div class="col-6 col-md-2 mb-3">
-<strong> <p>Kembang</hp> </strong>
-<ul class="nav flex-column">
-<li class="nav-item mb-2"><a href=# class="nav-link p-0 text-muted">About</a></li>
-<li class="nav-item mb-2"><a href=# class="nav-link p-0 text-muted">Contact</a></li>
-</ul>
-</div>
-<div class="col-6 col-md-2 mb-3">
-<strong> <p>Connect</hp> </strong>
-<ul class="nav flex-column">
-<li class="nav-item mb-2"><a href=https://www.github.com/httpsecure target=_blank rel="nofollow noopener noreferrer" class="nav-link p-0 text-muted">Github</a></li>
-<li class="nav-item mb-2"><a href=# target=_blank rel="nofollow noopener noreferrer" class="nav-link p-0 text-muted">Mastodon</a></li>
-</ul>
-</div>
-<div class="col-6 col-md-2 mb-3">
-<strong> <p>Thanks</hp> </strong>
-<ul class="nav flex-column">
-<li class="nav-item mb-2"><a href=https://www.netlify.com target=_blank rel="nofollow noopener noreferrer" class="nav-link p-0 text-muted">Netlify</a></li>
-<li class="nav-item mb-2"><a href=https://www.gohugo.io target=_blank rel="nofollow noopener noreferrer" class="nav-link p-0 text-muted">Hugo</a></li>
-<li class="nav-item mb-2"><a href=https://www.getbootstrap.com target=_blank rel="nofollow noopener noreferrer" class="nav-link p-0 text-muted">Bootstrap</a></li>
-</ul>
-</div>
-<div class="container py-6">
-<div class=row>
-<div class="col-lg-5 mb-3">
-<ul class="list-unstyled p-0 small">
-<li class=mb-4>&copy; 2022 Your Website</li>
-</ul>
+<footer class=py-4>
+<div class="d-flex justify-content-between">
+<div>&copy; All rights reserved.</div>
+<div>powered by <a href=https://gohugo.io/ class=text-black>Hugo</a></div>
 </div>
 </footer>
+</div>
 </div>
 </div>
 </body>

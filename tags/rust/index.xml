@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rust on Indigo Bell</title><link>https://soya-onishi.github.io/tags/rust/</link><description>Recent content in Rust on Indigo Bell</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 05 Jan 2023 22:25:29 +0900</lastBuildDate><atom:link href="https://soya-onishi.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml"/><item><title>extern crateについて</title><link>https://soya-onishi.github.io/post/extern-crate%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link><pubDate>Thu, 05 Jan 2023 22:25:29 +0900</pubDate><guid>https://soya-onishi.github.io/post/extern-crate%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid><description>extern crateについてedition 2018以降はほぼ使う必要がないとRustBookあたりに書いてあったと記憶しているが、 その感覚でいるとたまにlinterにextern crateを書けと言われたりする。 どういうときにextern crateが必要になるのかちゃんと理解できてなかったので、いい機会なので調べてみました。
+TL;DR 基本的にはRustBookの言うとおり、不要。
+例外として、coreやallocクレートのようなCargo.tomlで指定せずtoolchainに紐付いているようなクレートなど、 Cargo.tomlで指定しないクレートに対してはextern crateが必要。
+例外の例外として、coreなどと同様にtoolchainに紐づくstdはプレリュードとしてextern crateを記載しなくても使えるようになっている。
+もともとはどうだったのか 用法としてはGCCなどでの-lオプションに近く、 edition 2018以前は各クレートごとにextern crateが必要だったらしい。 しかし、大半はCargo.tomlの指定から導き出せるため、extern crateを不要にして余計な記述を廃したという流れとのこと。
+edition 2018以降はどうなのか 参考にしているページではボイラープレートなどなどと言っているのでextern crate &amp;lt;クレート名&amp;gt;みたいなのが大量に記述されていたんじゃないかと思いますが、 edition 2018以降はそのような記述が不要になっています。
+ただし例外として、Cargo.tomlで記載せずに使うような標準ライブラリレベルのallocやcoreクレートについては extern crateでの指定が必要のようです。 これらはもともと特定のtriple（例：x86_64_unknown-linux-gnuなど）のtoolchainに紐付いているものになります。 toolchainに紐付いているクレートにはstdも含まれるわけですが、 こちらについては自動的に参照できる状態になっているため、わざわざextern crate stdと記述する必要はないです。
+参考ページ Forumでの回答
+The Rust Referenceでの記載</description></item></channel></rss>
