@@ -1,0 +1,21 @@
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: Helvetica, "Sawarabi Gothic",Meiryo,"メイリオ","Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN",YuGothic,"游ゴシック",Arial,sans-serif;
+}
+
+h2 {
+  font-size: 28px;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 10.5px
+}
+
+code {
+  background-color: lightgray;
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+}
