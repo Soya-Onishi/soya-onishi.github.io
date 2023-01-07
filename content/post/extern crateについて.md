@@ -1,6 +1,8 @@
 ---
 title: "extern crateについて"
 date: 2023-01-05T22:25:29+09:00
+tags: ["Rust"]
+categories: ["備忘録"]
 draft: false
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "試しにブログ始めてみます"
 date: 2023-01-05T19:58:38+09:00
+tags: []
+categories: ["報告"]
 draft: false
 ---
 
