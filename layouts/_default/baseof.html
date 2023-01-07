@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{- partial "head.html" . -}}
+
+</head>
+
+<body class="d-flex flex-column justify-content-between" style="min-height: 100vh">
+<div class="justify-content-start">
+{{- partial "header.html" . -}}
+<div id="content">
+{{- block "main" . }}{{- end }}
+</div>
+</div>
+
+<div>
+{{- partial "footer.html" . -}}
+</div>
+ 
+</body>
+
+</html>

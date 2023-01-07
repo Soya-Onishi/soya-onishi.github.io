@@ -2,32 +2,30 @@
 <div class="container">
   <!-- {{- partial "breadcrumb.html" . -}} -->
   <div class="row justify-content-center pt-4">
-      <div class="pr-lg-4">
-        <div class="title mb-3">
-          <h1 class="text-left mb-4 fw-bold">{{ .Title }}</h1>
-          <div class="text-left mb-4">  
-           <div class="time">{{ .Date.Format "Jan. 2, 2006" }}</div> 
-          </div>
-          {{ with .Params.tags }}
-          <button class="btn btn-outline-light btn-sm rounded" type="button"> 
-				    <div id="tags">
-					    {{ range . }}
-					    <li><a href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . }}</a></li>
-					    {{ end }}
-            </div>
-          </button>
-			    {{ end }}
+    <div class="pr-lg-4">
+      <div class="title mb-3">
+        <h1 class="text-left mb-4 fw-bold">{{ .Title }}</h1>
+        <div class="text-left mb-4">  
+          <div class="time">{{ .Date.Format "Jan. 2, 2006" }}</div> 
         </div>
-
-        <hr>
-
-        <article class="page-content">
-        {{ .Content }}
-        </article>
-        
+        {{ with .Params.tags }}
+        <button class="btn btn-outline-light btn-sm rounded" type="button"> 
+				  <div id="tags">
+					  {{ range . }}
+					  <li><a href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . }}</a></li>
+					  {{ end }}
+          </div>
+        </button>
+			  {{ end }}
       </div>
+
+      <hr>
+
+      <article class="page-content">
+        {{ .Content }}
+      </article>
+        
     </div>
- 
-  </div>
+  </div> 
 </div>
 {{ end }}
