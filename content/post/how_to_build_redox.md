@@ -120,10 +120,24 @@ done
 ```
 
 `recipes/$recipe/recipe.toml`の部分について説明していきます。
-各パッケージは`/cookbook/recipes/`に入っています。
+各パッケージのディレクトリは`/cookbook/recipes/`に入っています。
 また各パッケージは`recipe.toml`を持っており、
 その内容からどこからソースコードを引っ張ってくるか、
 どうやってコンパイルするかがわかります。
 例えば`coreutils`パッケージにも`recipe.toml`がありますが、
 このパスは`/cookbook/recipes/coreutils/recipe.toml`になります。
+`recipe.toml`の内容については後ほど説明します。
+
+`target/release/cook --fetch-only "$recipe"`や`./cook.sh "$recipe" fetch`ではそのオプションの通り、`$recipe`で指定したパッケージのダウンロードを行います。
+
+## 各パッケージのビルド
+
+前節までで一旦`mk/repo.mk`内の`$(BUILD)/fetch.tag`は終わりです。
+`$(BUILD)/repo.tag`ルールを実行していきますが、
+`repo.sh`内がビルドを実行するスクリプトになるので、この中身を見ていきます。
+
+とはいえ、`repo.sh`でやっていることは引数で渡されたパッケージ名を
+一つずつ処理していくだけで、処理内容も`cook`や`cook.sh`の呼び出しとその呼び出しのために
+シェル変数を定義するのが主な内容です。
+実際のビルドは`cook`の中で行われます（`cook.sh`でも行いますが最終的に`cook`に渡しているのでやっていることは同じです）
 
