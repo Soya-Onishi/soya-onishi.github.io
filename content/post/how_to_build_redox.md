@@ -139,5 +139,69 @@ done
 とはいえ、`repo.sh`でやっていることは引数で渡されたパッケージ名を
 一つずつ処理していくだけで、処理内容も`cook`や`cook.sh`の呼び出しとその呼び出しのために
 シェル変数を定義するのが主な内容です。
-実際のビルドは`cook`の中で行われます（`cook.sh`でも行いますが最終的に`cook`に渡しているのでやっていることは同じです）
+実際のビルドは`cook`の中で行われます。
 
+
+## `cook`の処理について
+
+`cook`はRustプログラムではありますが、
+中ではシェルスクリプトによってビルドの処理が動きます。
+Rustプログラムはそのシェルスクリプトを動かすためのお膳立ての部分が主です。
+
+シェルスクリプトの中で重要な部分は以下の部分です。
+
+```sh
+function cookbook_cargo {
+    "${COOKBOOK_CARGO}" install "${COOKBOOK_CARGO_FLAGS[@]}"
+}
+```
+
+上記のうち、`${COOKBOOK_CARGO}`には`cookbook_redoxer`という名前の
+別のプログラムのパスが入っています。
+
+シェルスクリプトは前半と後半に分かれており、
+その間には上記`cookbook_cargo`を含むいくつかから選んだスクリプトが挟まります。
+この選択は`recipe.toml`の`[build]`セクション内にある`template`に依存します。
+例えば、`cookbook_cargo`が選ばれるのは`template`を`cargo`にしているときになります。
+
+## `cookbook_redoxer`の処理について
+
+上記のとおり、実際のビルドは`cookbook_redoxer`内で行われるので、
+内部を見ていきます。
+ここでは`cook`から呼ばれた際のオプションである
+`install`をつけた場合の動作を見ていきます。
+
+内部ではまず下記のように静的リンクするライブラリディレクトリのパスを指定するなど、
+前準備を行います。
+
+```rs
+let rustflags = format!(
+    "-L {}",
+    toolchain_dir.join(target()).join("lib").display()
+);
+```
+
+最後には`cargo`を呼び出してビルドを実行します。
+
+```rs
+crate::env::command("cargo")?
+    .arg(subcommand)
+    .arg("--target").arg(target())
+    .args(arguments)
+    .env("CARGO_TARGET_X86_64_UNKNOWN_REDOX_RUNNER", runner)
+    .env("RUSTFLAGS", rustflags)
+    .status()
+    .and_then(status_error)?;
+```
+
+`subcommand`には`cookbook_redoxer`を呼び出した際の１つ目の引数の文字列が入るため、
+今回の場合では`install`が入ることになります。
+つまりここでは`cargo install --target x86_64-unknown-redox`が
+実行されていることになります。
+
+とりあえずここまでが各パッケージのビルドの流れになります。
+カーネルのビルドですが、カーネルもパッケージの一つとなっており、
+今回説明したような流れでビルドしていくことになります。
+（実際にはkernelの`recipe.toml`では`[build]`の`template`に
+`cargo`を指定せず、シェルスクリプトを動かしているので、
+上記のように単に`cargo install`を動かすだけではないですが。）
